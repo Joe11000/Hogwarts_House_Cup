@@ -12,12 +12,12 @@ module PointsReceiverRole
 end
 
 class House
-  attr_reader :founder, :wizards, :name
+  attr_reader :founder, :students, :name
 
   include PointsReceiverRole
 
-  def initialize args=({ name: '', wizards: [], founder: nil })
-    @wizards = args[:wizards]
+  def initialize args=({ name: '', students: [], founder: nil })
+    @students = args[:students]
     @founder = args[:founder]
     @name = args[:name]
 

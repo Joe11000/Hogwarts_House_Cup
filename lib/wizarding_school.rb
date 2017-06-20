@@ -2,6 +2,7 @@ require_relative './house'
 require_relative './professor'
 require_relative './wizard'
 
+require 'active_support/core_ext/enumerable.rb'
 
 class WizardingSchool
   attr_reader :houses, :head_master, :professors
@@ -13,7 +14,8 @@ class WizardingSchool
   end
 
   def sort wizards
-    SortingHat.sort({ wizards: wizards, houses: houses })
+    SortingHat.sort({ students: wizards, houses: houses })
+    self
   end
 
   def house_cup_winner
@@ -21,14 +23,15 @@ class WizardingSchool
   end
 
   def house_cup_standings
-
+    houses.sort { |house1, house2| house2.points <=> house1.points }
+          .map {|house| [house.name, house.points] }
   end
 
   private
     module SortingHat
-      def sort args=({ wizards: [], houses: [] })
-        args.wizards.each do |wizard|
-          houses[rand(0...houses.length)].wizards << wizard
+      def self.sort args=({ students: [], houses: [] })
+        args[:students].each do |student|
+          args[:houses][rand(0...args[:houses].length)].students << student
         end
       end
     end

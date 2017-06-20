@@ -24,13 +24,6 @@ module Magicable
     def cast spell_name=spells.try(:sample)
       "Casting #{spell_name}"
     end
-
-    # def method_missing method_name
-    #   binding.pry
-    #   if spells.includes?(method_name)
-
-    #   end
-    # end
   end
 
   module ClassMethods
